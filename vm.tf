@@ -45,8 +45,8 @@ resource "azurerm_windows_virtual_machine" "vm1" {
 }
 
 resource "azurerm_virtual_machine_extension" "powershell_script" {
-  name                 = "EnableRouting"
-  virtual_machine_id   = azurerm_windows_virtual_machine.win_vm0.id
+  name                 = "Install-IIS"
+  virtual_machine_id   = azurerm_windows_virtual_machine.vm1.id
   publisher            = "Microsoft.Compute"
   type                 = "CustomScriptExtension"
   type_handler_version = "1.9"
