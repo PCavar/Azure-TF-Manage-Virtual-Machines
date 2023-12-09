@@ -43,11 +43,22 @@ resource "random_password" "vm_one_password" {
   special = true
 }
 
+resource "random_password" "vm_two_password" {
+  length  = 20
+  special = true
+}
+
 #Create Key Vault Secret
 resource "azurerm_key_vault_secret" "vm_one_password_secret" {
-  name         = "VM-ONE-IIS-Secret"
+  name         = "${var.prefix}-VM-ONE-IIS-Secret"
   value        = random_password.vm_one_password.result
   key_vault_id = azurerm_key_vault.kv1.id
   depends_on   = [azurerm_key_vault.kv1]
 }
 
+resource "azurerm_key_vault_secret" "vm_two_password_secret" {
+  name         = "${var.prefix}-VM-TWO-SECRET"
+  value        = random_password.vm_two_password.result
+  key_vault_id = azurerm_key_vault.kv1.id
+  depends_on   = [azurerm_key_vault.kv1]
+}
