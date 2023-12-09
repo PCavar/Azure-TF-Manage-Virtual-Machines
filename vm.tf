@@ -44,21 +44,21 @@ resource "azurerm_windows_virtual_machine" "vm1" {
   }
 }
 
-resource "azurerm_virtual_machine_extension" "example" {
-  name                 = "Install-IIS"
-  virtual_machine_id   = azurerm_windows_virtual_machine.vm1.id
-  publisher            = "Microsoft.Azure.Extensions"
-  type                 = "CustomScript"
-  type_handler_version = "2.0"
+resource "azurerm_virtual_machine_extension" "powershell_script" {
+  name                 = "EnableRouting"
+  virtual_machine_id   = azurerm_windows_virtual_machine.win_vm0.id
+  publisher            = "Microsoft.Compute"
+  type                 = "CustomScriptExtension"
+  type_handler_version = "1.9"
 
   settings = <<SETTINGS
- {
-  "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File /home/xenit-pc/Terraform-Assignment/install-IIS.ps1"
- }
-SETTINGS
+    {
+      "fileUris": ["https://raw.githubusercontent.com/PCavar/Azure-TF-Manage-Virtual-Machines/main/install-IIS.ps1"],
+      "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File routingScript.ps1"
+    }
+  SETTINGS
 
-
-  tags = {
+    tags = {
     environment = "${var.prefix}-ps1"
   }
 }
