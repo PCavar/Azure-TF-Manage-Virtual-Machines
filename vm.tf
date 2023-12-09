@@ -39,7 +39,7 @@ resource "azurerm_network_interface" "vm2_nic" {
 }
 
 resource "azurerm_windows_virtual_machine" "vm1" {
-  name                = "${var.prefix}-VM-One-IIS"
+  name                = "${var.prefix}-VM-One"
   depends_on          = [azurerm_key_vault.kv1]
   resource_group_name = azurerm_resource_group.rg_vnet1.name
   location            = azurerm_resource_group.rg_vnet1.location
@@ -61,6 +61,10 @@ resource "azurerm_windows_virtual_machine" "vm1" {
     offer     = "WindowsServer"
     sku       = "2019-datacenter-gensecond"
     version   = "latest"
+  }
+
+  tags = {
+    environment = "${var.prefix}-VM-ONE-IIS-Server"
   }
 }
 
