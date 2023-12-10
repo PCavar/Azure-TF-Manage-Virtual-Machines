@@ -1,2 +1,6 @@
-prefix = "non-prod"
-region = "North Europe"
+prefix              = "non-prod"
+region              = "North Europe"
+virtual_network_one = "10.80.0.0/20"
+virtual_network_two = "10.82.0.0/20"
+subnet_one          = "10.80.0.0/24"
+subnet_two          = "10.82.0.0/24"
