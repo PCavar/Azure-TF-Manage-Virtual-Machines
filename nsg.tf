@@ -48,7 +48,7 @@ resource "azurerm_network_security_rule" "AllowHTTP_vnet1" {
   network_security_group_name = azurerm_network_security_group.nsg_vnet1.name
 }
 
-resource "azurerm_network_security_rule" "AllowRDP_vnet2" {
+resource "azurerm_network_security_rule" "AllowHTTP_vnet2" {
   name                        = "Custom-Allow-HTTP"
   priority                    = 100
   direction                   = "Inbound"
